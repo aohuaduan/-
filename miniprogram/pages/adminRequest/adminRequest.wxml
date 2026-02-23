@@ -1,0 +1,13 @@
+<view class="page">
+  <view class="title">申请成为管理员</view>
+  <view class="sub">请填写申请理由（可选），提交后等待审核。</view>
+
+  <view class="card">
+    <view class="label">申请理由（可选）</view>
+    <textarea class="textarea" placeholder=""
+              value="{{note}}" bindinput="onInputNote" />
+    <button class="btn" loading="{{loading}}" bindtap="onSubmit">提交申请</button>
+  </view>
+
+  <view wx:if="{{statusText}}" class="tip">{{statusText}}</view>
+</view>

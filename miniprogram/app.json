@@ -1,0 +1,21 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/results/results",
+    
+
+    "pages/admin/admin",
+    "pages/adminManage/adminManage",
+
+    "pages/adminRequest/adminRequest"
+  ],
+  "window": {
+    "navigationBarTitleText": "绿碳正畸计算器",
+    "navigationBarBackgroundColor": "#ffffff",
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#f6f7fb",
+    "backgroundTextStyle": "light"
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

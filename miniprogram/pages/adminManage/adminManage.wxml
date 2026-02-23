@@ -1,0 +1,105 @@
+<scroll-view
+  scroll-y="true"
+  class="page"
+  refresher-enabled="true"
+  refresher-triggered="{{refresherTriggered}}"
+  bindrefresherrefresh="onRefresherRefresh"
+>
+<view class="page">
+  <view class="header">
+    <text class="title">管理员管理（仅总管理员）</text>
+    <button size="mini" bindtap="refresh">刷新</button>
+  </view>
+
+  <view wx:if="{{loading}}">加载中...</view>
+
+  <view wx:elif="{{!ok}}">
+    <text>失败：</text>
+    <text>{{error}}</text>
+  </view>
+
+  <view wx:else>
+    <view class="sub">当前管理员数量：{{admins.length}}</view>
+
+    <view class="sub">待审核申请</view>
+
+<view wx:if="{{reqLoading}}">申请加载中...</view>
+<view wx:elif="{{reqError}}">{{reqError}}</view>
+
+<scroll-view wx:else scroll-x="true" class="table-scroll">
+  <view class="table">
+    <view class="tr th">
+      <view class="td w-openid">openid</view>
+      <view class="td w-role">状态</view>
+      <view class="td w-op">操作</view>
+    </view>
+
+    <view class="tr" wx:for="{{requests}}" wx:key="_id">
+      <view class="td w-openid">{{item.openid}}</view>
+      <view class="td w-role">{{item.status}}</view>
+      <view class="td w-op">
+        <button size="mini" data-id="{{item._id}}" bindtap="onApproveRequest">通过</button>
+        <button size="mini" data-id="{{item._id}}" bindtap="onRejectRequest">拒绝</button>
+      </view>
+    </view>
+
+    <view wx:if="{{requests.length===0}}" class="tr">
+      <view class="td" style="width:900rpx;color:#999;">暂无待审核</view>
+    </view>
+  </view>
+</scroll-view>
+
+    <view class="add-card">
+  <view class="add-row">
+    <text class="add-label">openid</text>
+    <input class="add-input" placeholder="粘贴要添加的openid"
+           value="{{newOpenid}}" bindinput="onInputNewOpenid" />
+  </view>
+
+  <view class="add-row">
+    <text class="add-label">角色</text>
+    <picker mode="selector" range="{{roleOptions}}" value="{{newRoleIndex}}"
+            bindchange="onChangeNewRole">
+      <view class="add-picker">{{roleOptions[newRoleIndex]}}</view>
+    </picker>
+
+    <button size="mini" bindtap="onAddAdmin">添加/更新</button>
+  </view>
+</view>
+
+  <scroll-view scroll-x="true" class="table-scroll" enable-flex="true">
+      <view class="table">
+        <!-- 表头 -->
+        <view class="tr th">
+          <view class="td w-openid">openid</view>
+          <view class="td w-remark">备注</view>
+          <view class="td w-role">角色</view>
+          <view class="td w-op">操作</view>
+        </view>
+
+        <!-- 数据行 -->
+        <view class="tr" wx:for="{{admins}}" wx:key="_id">
+          <view class="td w-openid">{{item.openid}}</view>
+
+          <view class="td w-remark">
+          <input class="remark-input"
+         placeholder="备注姓名"
+         value="{{item.remark}}"
+         data-openid="{{item.openid}}"
+         bindblur="onRemarkBlur" />
+          </view>
+
+          <view class="td w-role">{{item.role}}</view>
+          <view class="td w-op">
+            <button size="mini"
+                    data-openid="{{item.openid}}"
+                    bindtap="onRemoveAdmin">
+              删除
+            </button>
+          </view>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+</view>
+</scroll-view>

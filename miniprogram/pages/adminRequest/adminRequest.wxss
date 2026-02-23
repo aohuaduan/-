@@ -1,0 +1,21 @@
+.page { padding: 24rpx; }
+.title { font-size: 34rpx; font-weight: 600; margin-bottom: 8rpx; }
+.sub { color: #666; margin-bottom: 18rpx; }
+
+.card { border: 1rpx solid #eee; border-radius: 16rpx; padding: 18rpx; }
+.label { color: #333; margin-bottom: 10rpx; }
+
+.textarea {
+  width: 100%;
+  min-height: 180rpx;
+  border: 1rpx solid #eee;
+  border-radius: 12rpx;
+  padding: 14rpx;
+  font-size: 26rpx;
+  box-sizing: border-box;
+  margin-bottom: 14rpx;
+}
+
+.btn { width: 100%; }
+
+.tip { margin-top: 16rpx; color: #2a7; }

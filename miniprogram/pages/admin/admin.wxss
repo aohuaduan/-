@@ -1,0 +1,52 @@
+/* pages/admin/admin.wxss */
+.page {
+  padding: 20rpx;
+  background: #f6f7fb;
+}
+
+.header {
+  font-weight: bold;
+  margin-bottom: 20rpx;
+}
+
+/* 横向滚动容器 */
+.table-scroll {
+  width: 100%;
+  white-space: nowrap;
+}
+
+/* 整个表格 */
+.table {
+  display: inline-block;
+  min-width: 2000rpx; /* 控制整体宽度，越大越能横滑 */
+}
+
+/* 每一行 */
+.tr {
+  display: flex;
+  flex-direction: row;
+  border-bottom: 1rpx solid #ddd;
+}
+
+/* 表头 */
+.th {
+  background: #e8f0ff;
+  font-weight: bold;
+}
+
+/* 每个单元格 */
+.td {
+  padding: 16rpx;
+  border-right: 1rpx solid #eee;
+  font-size: 24rpx;
+  text-align: center;
+  flex-shrink: 0;   /* 关键：禁止压缩 */
+}
+
+/* 不同宽度 */
+.w-id { width: 300rpx; }
+.w-time { width: 320rpx; }
+.w-openid { width: 350rpx; }
+.w-num { width: 160rpx; }
+.w-s { width: 120rpx; }
+.w-m { width: 180rpx; }

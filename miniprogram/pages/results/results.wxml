@@ -1,0 +1,128 @@
+<scroll-view scroll-y="true" class="page">
+
+<view class="card">
+  <view class="title">计算结果</view>
+  <view class="sub">结果单位：gCO₂（同时显示 kgCO₂）</view>
+</view>
+
+<view wx:if="{{!result.ready}}" class="card">
+  <view class="section-title">暂无结果</view>
+  <view class="sub">请返回首页完成输入并点击“计算”。</view>
+  <button class="btn" bindtap="goBack">返回</button>
+</view>
+
+<view wx:else class="card">
+  <view class="section-title">总排放</view>
+  <view class="result-big">
+    <text class="result-value">{{result.total_g}} g</text>
+    <text class="result-sub">≈ {{result.total_kg}} kg</text>
+  </view>
+
+  <view class="actions">
+    <button class="btn ghost" bindtap="copyReport">复制报告</button>
+    <button class="btn" open-type="share">分享</button>
+  </view>
+
+  <view class="sub tiny">
+    说明：牙套 = k×x；粘接材料 = k（仅初诊一次）；地铁按站；其余交通按km。
+  </view>
+</view>
+
+<view wx:if="{{result.ready}}" class="card">
+  <view class="section-title">按分类汇总</view>
+  <view class="table">
+    <view class="thead">
+      <text class="th">分类</text>
+      <text class="th right">gCO₂</text>
+    </view>
+    <view class="tbody">
+      <view class="tr" wx:for="{{result.categorySums}}" wx:key="category">
+        <text class="td">{{item.category}}</text>
+        <text class="td right">{{item.g}}</text>
+      </view>
+    </view>
+  </view>
+</view>
+
+<view wx:if="{{result.ready}}" class="card">
+  <view class="section-title">明细</view>
+  <view class="table">
+    <view class="thead">
+      <text class="th">项目</text>
+      <text class="th mid">次数</text>
+      <text class="th right">gCO₂</text>
+    </view>
+    <view class="tbody">
+      <view class="tr" wx:for="{{result.rows}}" wx:key="name">
+        <text class="td">{{item.name}}</text>
+        <text class="td mid">{{item.count}}</text>
+        <text class="td right">{{item.g}}</text>
+      </view>
+    </view>
+  </view>
+
+  <button class="btn ghost mt" bindtap="goBack">返回修改输入</button>
+</view>
+
+<view wx:if="{{result.ready}}" class="card">
+    <view class="section-title">计算公式</view>
+
+    <view class="formula-block">
+      <text class="formula-title">总公式</text>
+      <text class="formula-text">C_total = Σ (g_i × count_i)</text>
+    </view>
+
+    <view class="formula-block">
+      <text class="formula-title">展开式（终版口径）</text>
+
+      <text class="formula-text">
+        影像学：
+        C_img = 2.98×(n+1) + 6.86×n + 1.49×(n+1) + 1.49×n + 0.045×n + 0.045×(n+1)
+      </text>
+
+      <text class="formula-text">
+        实验室/洗牙：
+        C_lab = 770×N_lab + 1250×N_clean  （N为次数）
+      </text>
+
+      <text class="formula-text">
+        牙套与粘接：
+        C_align = c_set×(k×x)
+        C_bond  = c_set×k （仅初诊一次）
+        ⇒ C_align+bond = c_set×k×(x+1)
+      </text>
+
+      <text class="formula-text">
+        一次性耗材：
+        C_disposable = 65×x + 19.2×(0.1x) + 91.66×1 + 45×x + 6.45×(2x) + 6×N_lingual + 15×N_screw
+      </text>
+
+      <text class="formula-text">
+        交通：
+        {{formula.travel}}
+      </text>
+
+      <text class="formula-text">
+        科室用电：
+        C_clinic = 330×x  （按每次复诊1小时固定）
+      </text>
+
+      <text class="formula-text">
+        正畸附件：
+        C_acc = 0.75×(e_day×e_days) + 70×N_case + 55×N_chewie
+      </text>
+
+      <text class="formula牙期-text">
+        合计：
+        C_total = C_img + C_lab + C_align + C_bond + C_disposable + C_travel + C_clinic + C_acc
+      </text>
+    </view>
+
+    <view class="sub tiny">
+      变量：n=拍片次数，x=复诊次数，k=每次复诊牙套副数；c_set为所选品牌/替牙期状态对应的“每套牙套排放因子”；N_lab/N_clean为对应项目次数；交通若为地铁则按站数计算，否则按公里数计算。
+    </view>
+  </view>
+
+
+<view class="footer-space"></view>
+</scroll-view>

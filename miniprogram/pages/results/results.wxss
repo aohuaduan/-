@@ -1,0 +1,136 @@
+.page{
+  height: 100vh;
+  background: #f6f7fb;
+  padding: 16rpx;
+}
+
+.card{
+  background: #fff;
+  border-radius: 20rpx;
+  padding: 22rpx;
+  margin-bottom: 16rpx;
+  box-shadow: 0 6rpx 20rpx rgba(0,0,0,0.05);
+}
+
+.title{
+  font-size: 38rpx;
+  font-weight: 700;
+  margin-bottom: 8rpx;
+}
+
+.sub{
+  font-size: 24rpx;
+  color: #666;
+  line-height: 1.5;
+}
+
+.section-title{
+  font-size: 30rpx;
+  font-weight: 700;
+  margin-bottom: 14rpx;
+}
+
+.result-big{
+  display: flex;
+  flex-direction: column;
+  padding: 8rpx 0 4rpx 0;
+}
+
+.result-value{
+  font-size: 52rpx;
+  font-weight: 900;
+  margin-top: 4rpx;
+}
+
+.result-sub{
+  font-size: 24rpx;
+  color: #666;
+  margin-top: 6rpx;
+}
+
+.actions{
+  display: flex;
+  gap: 14rpx;
+  margin-top: 16rpx;
+}
+
+.btn{
+  flex: 1;
+  border-radius: 16rpx;
+  font-size: 30rpx;
+}
+
+.ghost{
+  background: #fff;
+  border: 1rpx solid #ddd;
+}
+
+.mt{
+  margin-top: 16rpx;
+}
+
+.table{
+  border: 1rpx solid #eee;
+  border-radius: 14rpx;
+  overflow: hidden;
+  margin-top: 10rpx;
+}
+
+.thead, .tr{
+  display: flex;
+  padding: 12rpx 14rpx;
+}
+
+.thead{
+  background: #fafafa;
+  border-bottom: 1rpx solid #eee;
+}
+
+.th, .td{
+  font-size: 26rpx;
+  color: #222;
+  flex: 1;
+}
+
+.mid{
+  text-align: center;
+  flex: 0.6;
+}
+
+.right{
+  text-align: right;
+  flex: 0.8;
+  font-variant-numeric: tabular-nums;
+}
+
+.tiny{
+  margin-top: 12rpx;
+  font-size: 22rpx;
+  color: #888;
+}
+
+.footer-space{
+  height: 40rpx;
+}
+.formula-block{
+  margin-top: 10rpx;
+  padding: 14rpx;
+  background: #fafafa;
+  border-radius: 14rpx;
+  border: 1rpx solid #eee;
+}
+
+.formula-title{
+  font-size: 26rpx;
+  font-weight: 700;
+  color: #222;
+}
+
+.formula-text{
+  display: block;
+  margin-top: 10rpx;
+  font-size: 24rpx;
+  color: #444;
+  line-height: 1.6;
+  white-space: pre-wrap;
+}

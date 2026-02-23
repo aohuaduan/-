@@ -1,0 +1,208 @@
+<scroll-view 
+  scroll-y="true" 
+  class="page" 
+  refresher-enabled="true"
+  refresher-triggered="{{refresherTriggered}}"
+  bindrefresherrefresh="onRefresherRefresh"
+  >
+
+<!-- 未登录：提示并给登录按钮 -->
+<view wx:if="{{!openid}}" class="card">
+  <view class="title">请先登录</view>
+  <view class="sub">登录后才能填写与保存记录</view>
+  <button class="btn" bindtap="doLogin">登录</button>
+</view>
+
+<!-- 已登录：显示原来的全部内容 -->
+<view wx:else>
+
+  <view class="card">
+    <view class="title">绿碳正畸计算器</view>
+    <view class="sub">n = 拍片次数（随访次数），x = 复诊次数，k = 每次复诊牙套副数（默认8）</view>
+  </view>
+
+  <!-- 基本参数 -->
+  <view class="card">
+    <view class="section-title">基本参数</view>
+
+    <view class="row">
+      <text class="label">拍片次数 n</text>
+      <input class="input" type="number" value="{{inputs.n}}" bindinput="onInputN" placeholder="例如 1"/>
+    </view>
+
+    <view class="row">
+      <text class="label">复诊次数 x</text>
+      <input class="input" type="number" value="{{inputs.x}}" bindinput="onInputX" placeholder="例如 6"/>
+    </view>
+
+    <view class="row">
+      <text class="label">每次复诊牙套副数 k</text>
+      <input class="input" type="number" value="{{inputs.k}}" bindinput="onInputK" placeholder="默认 8"/>
+    </view>
+
+    <view class="row">
+      <text class="label">牙套品牌</text>
+      <picker mode="selector" range="{{brandOptions}}" value="{{brandIndex}}" bindchange="onBrandChange">
+        <view class="picker">{{brandOptions[brandIndex]}}</view>
+      </picker>
+    </view>
+
+    <view class="row">
+      <text class="label">替牙期是否结束</text>
+      <picker mode="selector" range="{{ageOptions}}" value="{{ageIndex}}" bindchange="onAgeChange">
+        <view class="picker">{{ageOptions[ageIndex]}}</view>
+      </picker>
+    </view>
+  </view>
+
+  <!-- 次数项 -->
+  <view class="card">
+    <view class="section-title">可选项目（次数，支持多次）</view>
+
+    <view class="row">
+      <text class="label">血常规+传染病四项</text>
+      <input class="input" type="number" value="{{inputs.lab_blood_count}}" bindinput="onInputLabBloodCount" placeholder="没有填0"/>
+    </view>
+
+    <view class="row">
+      <text class="label">洗牙</text>
+      <input class="input" type="number" value="{{inputs.cleaning_count}}" bindinput="onInputCleaningCount" placeholder="没有填0"/>
+    </view>
+  </view>
+
+  <!-- 事件型耗材 -->
+  <view class="card">
+    <view class="section-title">事件型耗材（疗程总数）</view>
+
+    <view class="row">
+      <text class="label">舌侧扣（个）</text>
+      <input class="input" type="number" value="{{inputs.lingual_button_count}}" bindinput="onInputLingual" placeholder="没有填0"/>
+    </view>
+
+    <view class="row">
+      <text class="label">支抗钉（个）</text>
+      <input class="input" type="number" value="{{inputs.miniscrew_count}}" bindinput="onInputMiniscrew" placeholder="没有填0"/>
+    </view>
+  </view>
+
+  <!-- 交通 -->
+  <view class="card">
+    <view class="section-title">交通</view>
+
+    <view class="row">
+      <text class="label">交通方式</text>
+      <picker mode="selector" range="{{travelModeOptions}}" value="{{travelModeIndex}}" bindchange="onTravelModeChange">
+        <view class="picker">{{travelModeOptions[travelModeIndex]}}</view>
+      </picker>
+    </view>
+
+    <!-- km 输入 -->
+    <view wx:if="{{travelModeUnit === 'km'}}" class="row">
+      <text class="label">每次往返距离（km）</text>
+      <input class="input" type="number" value="{{inputs.travel_km_roundtrip}}" bindinput="onInputTravelKm" placeholder="例如 12.5"/>
+    </view>
+
+    <!-- station 输入 -->
+    <view wx:if="{{travelModeUnit === 'station'}}" class="row">
+      <text class="label">每次往返站数（站）</text>
+      <input class="input" type="number" value="{{inputs.travel_station_roundtrip}}" bindinput="onInputTravelStation" placeholder="例如 18"/>
+    </view>
+
+    <view class="sub">交通排放 = 单位因子 ×（往返km或往返站数）× x</view>
+  </view>
+
+  <!-- 科室用电 -->
+  <view class="card">
+    <view class="section-title">科室用电</view>
+    <view class="sub">科室用电排放 = 330(g/小时) × 1(小时/次) × x（按每次复诊1小时固定计算）</view>
+  </view>
+
+  <!-- 正畸附件 -->
+  <view class="card">
+    <view class="section-title">正畸附件</view>
+
+    <view class="row">
+      <text class="label">皮筋：每天用量（条/天）</text>
+      <input class="input" type="number" value="{{inputs.elastic_per_day}}" bindinput="onInputElasticPerDay" placeholder="没有填0"/>
+    </view>
+
+    <view class="row">
+      <text class="label">皮筋：使用天数（天）</text>
+      <input class="input" type="number" value="{{inputs.elastic_days}}" bindinput="onInputElasticDays" placeholder="没有填0"/>
+    </view>
+
+    <view class="row">
+      <text class="label">牙套收纳盒（个）</text>
+      <input class="input" type="number" value="{{inputs.case_box}}" bindinput="onInputCaseBox" placeholder="默认1"/>
+    </view>
+
+    <view class="row">
+      <text class="label">咬胶（个）</text>
+      <input class="input" type="number" value="{{inputs.chewie}}" bindinput="onInputChewie" placeholder="默认1"/>
+    </view>
+
+    <view class="sub">皮筋总数 = 每天用量 × 使用天数</view>
+  </view>
+
+  <!-- 计算按钮 -->
+  <view class="card">
+    <button class="btn" bindtap="onCompute">计算</button>
+    <view class="sub">结果单位：gCO₂（同时显示 kgCO₂）</view>
+  </view>
+
+  <!-- 结果 -->
+  <view wx:if="{{result.ready}}" class="card">
+    <view class="section-title">结果</view>
+
+    <view class="result-big">
+      <text class="result-label">总排放</text>
+      <text class="result-value">{{result.total_g}} g</text>
+      <text class="result-sub">≈ {{result.total_kg}} kg</text>
+    </view>
+
+    <view class="section-title">按分类汇总</view>
+    <view class="table">
+      <view class="thead">
+        <text class="th">分类</text>
+        <text class="th right">gCO₂</text>
+      </view>
+      <view class="tbody">
+        <view class="tr" wx:for="{{result.categorySums}}" wx:key="category">
+          <text class="td">{{item.category}}</text>
+          <text class="td right">{{item.g}}</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="section-title">明细</view>
+    <view class="table">
+      <view class="thead">
+        <text class="th">项目</text>
+        <text class="th mid">次数</text>
+        <text class="th right">gCO₂</text>
+      </view>
+      <view class="tbody">
+        <view class="tr" wx:for="{{result.rows}}" wx:key="name">
+          <text class="td">{{item.name}}</text>
+          <text class="td mid">{{item.count}}</text>
+          <text class="td right">{{item.g}}</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="sub tiny">说明：牙套= k×x；粘接材料= k（仅初诊一次）；地铁按站；其余交通按km。</view>
+  </view>
+
+  <view class="footer-space"></view>
+
+</view> <!-- wx:else 结束 -->
+
+</scroll-view>
+<view class="sub tiny" bindtap="onSecretTap">版本 v1.0</view>
+
+<button wx:if="{{showHiddenAdmin}}" bindtap="goHiddenAdmin">
+  管理员申请
+</button>
+<button wx:if="{{isAdmin}}" bindtap="goAdmin">管理员入口</button>
+<button wx:if="{{isAdmin}}" bindtap="onImportExcel">Excel导入</button>
+

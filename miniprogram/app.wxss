@@ -1,0 +1,14 @@
+/* 全局样式：尽量少，只放通用基础 */
+page {
+  background: #f6f7fb;
+  color: #222;
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+}
+
+/* 统一按钮按压反馈 */
+button {
+  border: none;
+}
+button::after {
+  border: none;
+}

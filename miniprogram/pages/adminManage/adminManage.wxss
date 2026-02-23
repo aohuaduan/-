@@ -1,0 +1,136 @@
+.page { padding: 20rpx; }
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12rpx;
+}
+
+.title { font-weight: 600; font-size: 32rpx; }
+.sub { color: #666; margin: 12rpx 0; }
+
+.table-scroll { width: 100%; }
+.table { border: 1rpx solid #eee; border-radius: 16rpx; overflow: hidden; min-width: 900rpx; }
+
+.tr { display: flex; flex-direction: row; }
+.th { background: #f7f7f7; font-weight: 600; }
+
+.td {
+  padding: 18rpx 14rpx;
+  border-bottom: 1rpx solid #eee;
+  border-right: 1rpx solid #eee;
+  font-size: 26rpx;
+  white-space: nowrap;
+}
+
+.tr:last-child .td { border-bottom: none; }
+.td:last-child { border-right: none; }
+
+.w-openid { width: 560rpx; }
+.w-role { width: 200rpx; }
+.w-op { width: 240rpx; }
+
+.op-tip { color: #999; font-size: 24rpx; }
+.add-card {
+  border: 1rpx solid #eee;
+  border-radius: 16rpx;
+  padding: 16rpx;
+  margin: 12rpx 0 18rpx;
+  background: #fff;
+}
+
+.add-row {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+  margin-bottom: 12rpx;
+}
+
+.add-row:last-child { margin-bottom: 0; }
+
+.add-label { width: 110rpx; color: #666; }
+
+.add-input {
+  flex: 1;
+  border: 1rpx solid #eee;
+  border-radius: 12rpx;
+  padding: 12rpx;
+  font-size: 26rpx;
+}
+
+.add-picker {
+  width: 240rpx;
+  border: 1rpx solid #eee;
+  border-radius: 12rpx;
+  padding: 12rpx;
+  font-size: 26rpx;
+}
+
+.w-remark { width: 260rpx; }
+
+.remark-input{
+  border: 1rpx solid #eee;
+  border-radius: 10rpx;
+  padding: 8rpx 10rpx;
+  font-size: 24rpx;
+  width: 220rpx;
+  box-sizing: border-box;
+}
+
+/* 横向滚动容器：给最后一列留出空间，避免删除按钮被裁 */
+.table-scroll{
+  width: 100%;
+  overflow: hidden;
+  padding-right: 40rpx;   /* ✅ 关键：右侧留白 */
+  box-sizing: border-box;
+}
+
+/* 表格整体：强制撑开宽度，不要被压缩 */
+.table{
+  display: inline-block;  /* ✅ 关键：用 inline-block 让宽度按内容撑开 */
+  min-width: 100%;
+}
+
+/* 行：用 flex，且禁止换行 */
+.tr{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  white-space: nowrap;
+}
+
+/* 单元格：禁止被压缩，避免错位 */
+.td{
+  flex-shrink: 0;         /* ✅ 关键：不允许缩小 */
+  padding: 16rpx 12rpx;
+  box-sizing: border-box;
+  border-bottom: 1rpx solid #f2f2f2;
+}
+
+/* 表头 */
+.th .td{
+  font-weight: 600;
+  background: #fafafa;
+}
+
+/* 各列宽度（你现在是 4 列：openid / 备注 / 角色 / 操作） */
+.w-openid{ width: 520rpx; }
+.w-remark{ width: 280rpx; }
+.w-role{   width: 220rpx; }
+
+/* 操作列要足够宽，否则“删除”会被挤掉 */
+.w-op{
+  width: 260rpx;          /* ✅ 关键：加宽 */
+  padding-right: 30rpx;   /* ✅ 关键：再给操作列一点右内边距 */
+}
+
+/* 备注输入框不要撑爆 td */
+.remark-input{
+  width: 240rpx;
+  box-sizing: border-box;
+  border: 1rpx solid #eee;
+  border-radius: 10rpx;
+  padding: 8rpx 10rpx;
+  font-size: 24rpx;
+}
