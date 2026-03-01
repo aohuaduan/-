@@ -1,4 +1,4 @@
-// cloudfunctions/records/_shared/guard.js
+// 复制件，需同步版本！
 const cloud = require('wx-server-sdk')
 cloud.init({ env: cloud.DYNAMIC_CURRENT_ENV })
 const db = cloud.database()

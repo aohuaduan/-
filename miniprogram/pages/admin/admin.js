@@ -1,6 +1,7 @@
 const { callFn } = require('../../api/call')
+const { withTabBar } = require('../../utils/tabbar');
 
-Page({
+Page(withTabBar(3, {
   data: {
     loading: true,
     ok: false,
@@ -8,7 +9,8 @@ Page({
     total: 0,
     records: [],
     adminRole: null,
-    refresherTriggered: false
+    refresherTriggered: false,
+    exporting: false
   },
 
   onLoad() {
@@ -103,6 +105,47 @@ Page({
     })
   },
 
+  // ✅ 新增：导出Excel
+  async onExportExcel() {
+    if (this.data.exporting) return
+    this.setData({ exporting: true })
+
+    wx.showLoading({ title: '生成中...' })
+    try {
+      // 后端是 records 云函数下的 admin.exportExcel
+      const r = await callFn('records', { action: 'admin.exportExcel' })
+
+      // 兼容不同返回结构：{fileID} / {fileId} / 直接返回字符串
+      const fileID = (r && (r.fileID || r.fileId)) || r
+      if (!fileID || typeof fileID !== 'string') {
+        throw new Error('导出失败：未获取到 fileID')
+      }
+
+      // 下载到本地临时文件
+      const dl = await wx.cloud.downloadFile({ fileID })
+      const filePath = dl && dl.tempFilePath
+      if (!filePath) throw new Error('导出失败：下载文件失败')
+
+      wx.hideLoading()
+
+      // 打开文档预览（带菜单可转发/保存）
+      await wx.openDocument({
+        filePath,
+        fileType: 'xlsx',
+        showMenu: true
+      })
+    } catch (e) {
+      wx.hideLoading()
+      wx.showModal({
+        title: '导出失败',
+        content: (e && e.message) ? e.message : String(e),
+        showCancel: false
+      })
+    } finally {
+      this.setData({ exporting: false })
+    }
+  },
+
   onRefresherRefresh() {
     this.setData({ refresherTriggered: true })
     Promise.resolve(this.refresh()).finally(() => {
@@ -113,4 +156,4 @@ Page({
   goAdminManage() {
     wx.navigateTo({ url: '/pages/adminManage/adminManage' })
   }
-})
+}))

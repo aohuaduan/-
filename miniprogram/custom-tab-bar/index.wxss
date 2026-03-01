@@ -1,0 +1,20 @@
+.tabbar{
+  position: fixed;
+  left: 0; right: 0; bottom: 0;
+  height: 110rpx;
+  padding-bottom: env(safe-area-inset-bottom);
+  background: #fff;
+  display: flex;
+  box-shadow: 0 -10rpx 30rpx rgba(0,0,0,0.06);
+}
+.item{
+  flex: 1;
+  text-align: center;
+  line-height: 110rpx;
+  font-size: 34rpx;   /* 🔥这里调大 */
+  color: #8f9a9a;
+}
+.on{
+  color: #19a6a2;
+  font-weight: 800;
+}

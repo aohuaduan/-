@@ -1,0 +1,6 @@
+<view class="page">
+  <view class="title">低碳</view>
+  <view class="card">我的低碳概览（占位）</view>
+  <view class="card">今日任务（占位）</view>
+  <view class="card">徽章/成长（占位）</view>
+</view>

@@ -1,21 +1,28 @@
 {
   "pages": [
+    "pages/home/home",
     "pages/index/index",
-    "pages/results/results",
-    
-
+    "pages/lowcarbon/lowcarbon",
     "pages/admin/admin",
-    "pages/adminManage/adminManage",
 
+    "pages/results/results",
+    "pages/adminManage/adminManage",
     "pages/adminRequest/adminRequest"
   ],
   "window": {
-    "navigationBarTitleText": "绿碳正畸计算器",
-    "navigationBarBackgroundColor": "#ffffff",
+    "navigationBarTitleText": "绿碳正畸",
+    "navigationBarBackgroundColor": "#f3fbfb",
     "navigationBarTextStyle": "black",
-    "backgroundColor": "#f6f7fb",
+    "backgroundColor": "#f4f7f7",
     "backgroundTextStyle": "light"
   },
-  "style": "v2",
-  "sitemapLocation": "sitemap.json"
+    "tabBar": {
+      "custom": true,
+      "list": [
+        { "pagePath": "pages/home/home", "text": "首页" },
+        { "pagePath": "pages/index/index", "text": "计算" },
+        { "pagePath": "pages/lowcarbon/lowcarbon", "text": "低碳" },
+        { "pagePath": "pages/admin/admin", "text": "管理" }
+      ]
+    }
 }

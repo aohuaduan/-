@@ -1,0 +1,11 @@
+page { background: #f4f7f7; }
+.page { padding: 22rpx; }
+.title { font-size: 40rpx; font-weight: 900; margin: 12rpx 0 18rpx; }
+.card {
+  background: #fff;
+  border-radius: 24rpx;
+  padding: 26rpx;
+  margin-bottom: 16rpx;
+  box-shadow: 0 10rpx 30rpx rgba(0,0,0,0.05);
+  color: #1a1a1a;
+}

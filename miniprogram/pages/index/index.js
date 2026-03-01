@@ -1,6 +1,7 @@
 const { callFn } = require('../../api/call')
+const { withTabBar } = require('../../utils/tabbar');
 
-Page({
+Page(withTabBar(1, {
   goAdmin() {
     wx.navigateTo({ url: '/pages/admin/admin' })
   },
@@ -69,6 +70,7 @@ Page({
     importing: false,
     importResult: null
   },
+
 
   onPullDownRefresh() {
     // 下拉刷新：重新拉取权限状态
@@ -421,4 +423,4 @@ Page({
     if (!Number.isFinite(n)) return '0.000'
     return n.toFixed(3)
   }
-})
+}))

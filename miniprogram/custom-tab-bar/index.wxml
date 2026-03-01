@@ -1,0 +1,6 @@
+<view class="tabbar">
+  <view class="item {{active===0?'on':''}}" bindtap="go" data-i="0">首页</view>
+  <view class="item {{active===1?'on':''}}" bindtap="go" data-i="1">计算</view>
+  <view class="item {{active===2?'on':''}}" bindtap="go" data-i="2">低碳</view>
+  <view class="item {{active===3?'on':''}}" bindtap="go" data-i="3">管理</view>
+</view>

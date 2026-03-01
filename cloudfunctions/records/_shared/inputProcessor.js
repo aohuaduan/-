@@ -1,3 +1,4 @@
+// 复制件，需同步版本！
 // cloudfunctions/computeAndSave/_shared/inputProcessor.js
 // 输入处理骨架：normalize + issues（先占坑，未来再扩展规则）
 // 注意：由于云端部署限制，本文件会在多个云函数中复制；用版本号保证同步。

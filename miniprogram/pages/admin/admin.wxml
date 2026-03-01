@@ -19,7 +19,7 @@
 
       <view class="header-actions">
         <button size="mini" bindtap="refresh">刷新</button>
-        <button size="mini" bindtap="onExportExcel">导出Excel</button>
+        <button bindtap="onExportExcel" loading="{{exporting}}" disabled="{{exporting}}">导出Excel</button>
 
         <!-- ⚠️ 危险操作：所有管理员都可见 -->
         <button

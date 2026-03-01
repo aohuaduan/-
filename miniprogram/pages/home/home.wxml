@@ -1,0 +1,115 @@
+<view class="page">
+  <!-- 顶部渐变背景 -->
+  <view class="bg"></view>
+
+  <!-- 顶部栏 -->
+  <view class="topbar">
+    <view class="loc" bindtap="onTapLocation">
+      <text class="loc-icon">📍</text>
+      <text class="loc-text">{{hospital}}</text>
+    </view>
+    <view class="bell" bindtap="onTapBell">
+      <text class="bell-icon">🔔</text>
+      <view wx:if="{{hasNotice}}" class="dot"></view>
+    </view>
+  </view>
+
+  <!-- 身份选择 -->
+  <view class="card">
+    <view class="card-hd">
+      <text class="card-title">身份选择</text>
+    </view>
+
+    <view class="seg">
+      <view class="seg-item {{role==='patient'?'active':''}}" bindtap="setRole" data-role="patient">我是患者</view>
+      <view class="seg-item {{role==='doctor'?'active':''}}" bindtap="setRole" data-role="doctor">我是医生</view>
+    </view>
+
+    <view class="hint">欢迎来到低碳口腔医疗平台，开始您的绿色旅程！</view>
+  </view>
+
+  <!-- 今日低碳任务推荐 -->
+  <view class="card">
+    <view class="row-between">
+      <text class="card-title">今日低碳任务推荐</text>
+      <view class="meta">
+        <text class="meta-text">剩余：{{taskLeft}}</text>
+        <text class="meta-text">积分 {{taskPoint}}</text>
+      </view>
+    </view>
+
+    <view class="task">
+      <view class="task-icon">
+        <text class="task-icon-text">🌿</text>
+      </view>
+
+      <view class="task-main">
+        <view class="task-title">{{taskTitle}}</view>
+        <view class="task-sub">
+          <text>预约就诊减碳：</text>
+          <text class="co2">{{taskCo2}}</text>
+          <text> CO₂e</text>
+        </view>
+      </view>
+
+      <view class="task-go" bindtap="goLowcarbon">
+        <text>去完成</text><text class="chev">›</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 计算快捷入口 -->
+  <view class="card">
+    <view class="card-hd">
+      <text class="card-title">计算快捷入口</text>
+    </view>
+
+    <view class="calc-grid">
+      <view class="calc-item" bindtap="goCalc" data-mode="friendly">
+        <view class="calc-icon blue">🧾</view>
+        <view class="calc-name">友好计算</view>
+        <view class="calc-desc">简单快速评估</view>
+      </view>
+
+      <view class="calc-item" bindtap="goCalc" data-mode="pro">
+        <view class="calc-icon green">📋</view>
+        <view class="calc-name">专业计算</view>
+        <view class="calc-desc">详细精准分析</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- Banner -->
+  <view class="banner" bindtap="onTapBanner">
+    <view class="banner-left">
+      <view class="banner-title">口腔诊疗·绿色同行</view>
+      <view class="banner-sub">低碳诊疗项目启动</view>
+    </view>
+    <view class="banner-right">
+      <!-- 这里用占位头像，后续替换成真实图片 -->
+      <view class="avatar"></view>
+      <view class="avatar"></view>
+    </view>
+  </view>
+
+  <!-- 科普/动态 -->
+  <view class="card">
+    <view class="tabs">
+      <view class="tab {{tab==='ortho'?'tab-active':''}}" bindtap="setTab" data-tab="ortho">正畸科普</view>
+      <view class="tab {{tab==='eco'?'tab-active':''}}" bindtap="setTab" data-tab="eco">环保科普</view>
+      <view class="tab {{tab==='news'?'tab-active':''}}" bindtap="setTab" data-tab="news">项目动态</view>
+    </view>
+
+    <view class="list">
+      <view class="item" wx:for="{{articles}}" wx:key="id" bindtap="openArticle" data-id="{{item.id}}">
+        <view class="thumb {{item.thumbClass}}"></view>
+        <view class="item-main">
+          <view class="item-title">{{item.title}}</view>
+          <view class="item-meta">{{item.tag}}　{{item.read}} 阅读｜{{item.date}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="safe-bottom"></view>
+</view>
